@@ -1,0 +1,18 @@
+{
+  "name": "react-pdf-skill",
+  "metadata": {
+    "description": "React-PDF skill for generating PDF documents with Claude",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "react-pdf",
+      "description": "Generate PDF documents using React-PDF library (@react-pdf/renderer)",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/react-pdf"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "@react-pdf/renderer": "^4.3.2",
+    "canvas": "^3.2.1",
+    "lucide-static": "^0.563.0",
+    "pdfjs-dist": "^5.4.624",
+    "react": "^19.2.4"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.14",
+    "tsx": "^4.21.0"
+  }
+}

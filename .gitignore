@@ -1,0 +1,10 @@
+node_modules/
+*.pdf
+*.png
+*.zip
+.DS_Store
+fonts/
+bun.lock
+
+# Local dev — symlink for skill discovery
+.claude/
