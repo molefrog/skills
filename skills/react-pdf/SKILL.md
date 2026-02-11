@@ -1,10 +1,6 @@
 ---
 name: react-pdf
-description:
-  Generate PDF documents using React-PDF library (@react-pdf/renderer). Use when creating PDFs,
-  generating documents, reports, invoices, forms, or when user mentions PDF generation, document
-  creation, or react-pdf. CRITICAL: All fonts must be downloaded as local files first - remote URLs
-  do not work. Use google-fonts.txt to find font URLs, then download with curl before registering.
+description: "Generate PDF documents using React-PDF library (@react-pdf/renderer). Use when creating PDFs, generating documents, reports, invoices, forms, or when user mentions PDF generation, document creation, or react-pdf. CRITICAL: All fonts must be downloaded as local files first - remote URLs do not work. Use google-fonts.txt to find font URLs, then download with curl before registering."
 ---
 
 # Generating PDFs with React-PDF
@@ -20,7 +16,6 @@ description:
 
 ## Files
 
-- `scripts/capture.ts` - CLI tool for capturing PDF pages as images (for previewing generated PDFs)
 - `references/google-fonts.txt` - Metadata for ~65 popular Google Fonts with TrueType URLs. Each line
   is a font variant in tab-separated format: `font name`, `style`, `category`, `weight`, `url`.
 - `references/components.md` - Full component API reference and supported CSS properties
@@ -32,8 +27,6 @@ description:
 npm install react @react-pdf/renderer
 npm install -D tsx @types/react
 ```
-
-For PDF previewing: `npm install pdfjs-dist canvas`
 
 `tsx` runs TypeScript + JSX files directly via Node with no config — no `tsconfig.json` needed.
 It uses esbuild under the hood and handles JSX transformation automatically.
@@ -107,17 +100,29 @@ await renderToFile(<MyDocument />, "./output.pdf");
 
 ## Previewing PDFs
 
-Use `scripts/capture.ts` to visually inspect generated PDFs:
+To visually inspect generated PDFs, convert pages to images. Try `pdftoppm` first (often pre-installed),
+fall back to Python's PyMuPDF if unavailable.
+
+**Option 1: pdftoppm (poppler-utils)** — preferred, no install needed in many environments:
 
 ```bash
-# Show PDF info and page dimensions
-npx tsx skills/react-pdf/scripts/capture.ts document.pdf
+pdftoppm -png -r 200 document.pdf preview
+# → preview-1.png, preview-2.png, ...
+```
 
-# Capture a single page as an image
-npx tsx skills/react-pdf/scripts/capture.ts document.pdf 1 preview.png
+**Option 2: PyMuPDF (Python)** — fallback if pdftoppm is not available:
 
-# Capture multiple pages (outputs preview-1.png, preview-2.png, preview-3.png)
-npx tsx skills/react-pdf/scripts/capture.ts document.pdf 1,2,3 preview.png
+```bash
+pip install pymupdf
+```
+
+```python
+import fitz
+
+doc = fitz.open("document.pdf")
+for i, page in enumerate(doc):
+    pix = page.get_pixmap(dpi=200)
+    pix.save(f"page-{i+1}.png")
 ```
 
 ## Rendering Methods
