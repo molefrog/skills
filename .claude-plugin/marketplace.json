@@ -1,5 +1,8 @@
 {
   "name": "react-pdf-skill",
+  "owner": {
+    "name": "molefrog"
+  },
   "metadata": {
     "description": "React-PDF skill for generating PDF documents with Claude",
     "version": "1.0.0"
